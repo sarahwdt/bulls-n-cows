@@ -1,4 +1,4 @@
-package org.sarahwdt.model.game.symbols;
+package org.sarahwdt.model.game.core.symbols;
 
 import java.util.Collection;
 

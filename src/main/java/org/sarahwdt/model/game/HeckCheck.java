@@ -1,7 +1,6 @@
 package org.sarahwdt.model.game;
 
-
-import org.sarahwdt.model.game.symbols.Symbols;
+import org.sarahwdt.model.game.core.symbols.Symbols;
 
 import java.util.Iterator;
 

@@ -1,7 +1,8 @@
-package org.sarahwdt.model.game.creators;
+package org.sarahwdt.model.game.core.creators;
 
-import org.sarahwdt.model.game.symbols.DecimalNumberSecret;
-import org.sarahwdt.model.game.symbols.Symbols;
+
+import org.sarahwdt.model.game.core.symbols.DecimalNumberSecret;
+import org.sarahwdt.model.game.core.symbols.Symbols;
 
 import java.util.LinkedHashSet;
 
