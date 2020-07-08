@@ -26,6 +26,16 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>javax</groupId>
+      <artifactId>javaee-api</artifactId>
+      <version>7.0</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -68,7 +78,7 @@
           <configuration>
             <url>http://localhost:8080/manager/text</url>
             <server>TomcatServer</server>
-            <path>/index</path>
+            <path>/</path>
           </configuration>
         </plugin>
       </plugins>
