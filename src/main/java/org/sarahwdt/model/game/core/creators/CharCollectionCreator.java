@@ -1,9 +1,9 @@
 package org.sarahwdt.model.game.core.creators;
 
 
-import org.sarahwdt.model.game.core.symbols.Symbols;
+import org.sarahwdt.model.game.core.symbols.GameCollection;
 
-public abstract class CharCollectionCreator {
+public abstract class CharCollectionCreator implements GameCollectionCreator{
     private int length = 4;
 
     public int getLength() {
@@ -15,5 +15,5 @@ public abstract class CharCollectionCreator {
         return this;
     }
 
-    public abstract Symbols create();
+    public abstract GameCollection create();
 }

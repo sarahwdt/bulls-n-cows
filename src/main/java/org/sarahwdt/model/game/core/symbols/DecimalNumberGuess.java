@@ -2,7 +2,7 @@ package org.sarahwdt.model.game.core.symbols;
 
 import java.util.LinkedList;
 
-public class DecimalNumberGuess implements Symbols {
+public class DecimalNumberGuess implements GameCollection {
     protected final LinkedList<Integer> guess;
 
     public DecimalNumberGuess(LinkedList<Integer> guess) {

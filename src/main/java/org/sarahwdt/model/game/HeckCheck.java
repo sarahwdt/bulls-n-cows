@@ -1,11 +1,11 @@
 package org.sarahwdt.model.game;
 
-import org.sarahwdt.model.game.core.symbols.Symbols;
+import org.sarahwdt.model.game.core.symbols.GameCollection;
 
 import java.util.Iterator;
 
 public class HeckCheck {
-    public static int checkBulls(Symbols secret, Symbols userGuess) {
+    public static int checkBulls(GameCollection secret, GameCollection userGuess) {
         if (checkCows(secret, userGuess) == 0) return 0;
         int count = 0;
         Iterator<?> c_guess = userGuess.getCollection().iterator();
@@ -13,7 +13,7 @@ public class HeckCheck {
         return count;
     }
 
-    public static int checkCows(Symbols secret, Symbols userGuess) {
+    public static int checkCows(GameCollection secret, GameCollection userGuess) {
         int count = 0;
         for (Object i : userGuess.getCollection()) {
             if (secret.getCollection().contains(i)) count++;

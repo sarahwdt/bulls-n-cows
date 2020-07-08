@@ -2,13 +2,17 @@ package org.sarahwdt.model.game.core.creators;
 
 
 import org.sarahwdt.model.game.core.symbols.DecimalNumberSecret;
-import org.sarahwdt.model.game.core.symbols.Symbols;
+import org.sarahwdt.model.game.core.symbols.GameCollection;
 
 import java.util.LinkedHashSet;
 
-public class DecimalNumberSecretCreator extends CharCollectionCreator {
+public class DecimalNumberSecretCreator extends SecretCreator {
+    DecimalNumberSecretCreator(int length) {
+        super(length);
+    }
+
     @Override
-    public Symbols create() {
+    public GameCollection create() {
         LinkedHashSet<Integer> secret = new LinkedHashSet<>();
         for (int i = 0; i < this.getLength(); i++) {
             do {
