@@ -5,18 +5,18 @@ import org.sarahwdt.model.game.symbols.Symbols;
 
 import java.util.LinkedList;
 
-public class DecimalNumberGuessCreator extends CharCollectionCreator<Integer> {
+public class DecimalNumberGuessCreator extends CharCollectionCreator {
     DecimalNumberGuess guess;
 
-    public DecimalNumberGuessCreator(String s){
+    public DecimalNumberGuessCreator(String s) {
         LinkedList<Integer> guess_created = new LinkedList<>();
-        if(s.length() != this.getLength()) throw new IllegalArgumentException(s);
+        if (s.length() != this.getLength()) throw new IllegalArgumentException(s);
         for (int i = 0; i < this.getLength(); i++) guess_created.add(Integer.parseInt(String.valueOf(s.charAt(i))));
         guess = new DecimalNumberGuess(guess_created);
     }
 
     @Override
-    public Symbols<Integer> create() {
+    public Symbols create() {
         return guess;
     }
 }

@@ -1,15 +1,16 @@
 package org.sarahwdt.model.game.symbols;
 
-import java.util.Collection;
-import java.util.LinkedHashSet;
+import java.util.Set;
 
-public class DecimalNumberSecret implements Symbols<Integer> {
-    private final LinkedHashSet<Integer> secret;
-    public DecimalNumberSecret(LinkedHashSet<Integer> secret){
+public class DecimalNumberSecret implements Symbols {
+    private final Set<Integer> secret;
+
+    public DecimalNumberSecret(Set<Integer> secret) {
         this.secret = secret;
     }
+
     @Override
-    public Collection<Integer> getCollection() {
+    public Set<Integer> getCollection() {
         return secret;
     }
 }
