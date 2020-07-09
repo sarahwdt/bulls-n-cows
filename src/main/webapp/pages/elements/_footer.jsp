@@ -1,0 +1,1 @@
+<footer class="w3-gray" style="position: fixed; left: 0; bottom: 0; padding: 10px; width: 100%;">Copyright ©Sarah will die today, 2049.</footer>
