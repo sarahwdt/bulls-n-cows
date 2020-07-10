@@ -1,9 +1,10 @@
 package org.sarahwdt.controller;
 
 import org.sarahwdt.controller.authorization.Checker;
+import org.sarahwdt.controller.authorization.SignInWithCookies;
 import org.sarahwdt.controller.authorization.UserChecker;
 import org.sarahwdt.controller.authorization.checks.*;
-import org.sarahwdt.model.UsersModel;
+import org.sarahwdt.controller.cookies.AuthCookieHandler;
 import org.sarahwdt.model.entities.User;
 import org.sarahwdt.model.services.UserServices;
 
@@ -13,9 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 public class SignUpServlet extends HttpServlet {
 
@@ -35,13 +34,13 @@ public class SignUpServlet extends HttpServlet {
                 new PasswordMaxLengthCheck(64),
                 new UserExistCheck(model)));
 
-        if(checker.check().isEmpty()){
+        //TODO:null->optional
+        if(Objects.isNull(checker.check())){
             model.saveUser(user);
-            //TODO:Cookie and other
-            req.getSession().setAttribute("user", user);
+            new SignInWithCookies<>( req, resp, model).authorize(user);
             resp.sendRedirect("/");
         } else {
-            req.setAttribute("error", checker.check().get(0));
+            req.setAttribute("error", checker.check());
             req.getRequestDispatcher("/pages/signup.jsp").forward(req, resp);
         }
     }

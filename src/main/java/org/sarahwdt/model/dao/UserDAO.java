@@ -10,7 +10,10 @@ import java.util.List;
 
 public class UserDAO implements DAO<User>{
     public User findById(int id) {
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(User.class, id);
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        User user = session.get(User.class, id);
+        session.close();
+        return user;
     }
 
     public void save(User user) {
@@ -38,7 +41,9 @@ public class UserDAO implements DAO<User>{
     }
 
     public List<User> findAll() {
-        return (List<User>) HibernateSessionFactoryUtil.getSessionFactory().openSession()
-                .createQuery("FROM User").list();
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        List<User> users = session.createQuery("FROM User").list();
+        session.close();
+        return users;
     }
 }

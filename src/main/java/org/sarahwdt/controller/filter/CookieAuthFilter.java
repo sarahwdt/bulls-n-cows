@@ -1,12 +1,16 @@
-package org.sarahwdt.controller.common;
+package org.sarahwdt.controller.filter;
 
-import org.sarahwdt.model.UsersModel;
+import org.sarahwdt.controller.authorization.SignIn;
+import org.sarahwdt.controller.cookies.AuthCookieHandler;
 import org.sarahwdt.model.entities.User;
+import org.sarahwdt.model.services.UserServices;
 
 import javax.servlet.*;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Objects;
+import java.util.Optional;
 
 public class CookieAuthFilter implements Filter {
     FilterConfig config;
@@ -19,16 +23,12 @@ public class CookieAuthFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
-        if (req.getSession().getAttribute("user") == null) {
-            String name = null, pass = null;
-            for (Cookie c : req.getCookies()) {
-                name = c.getName().equals("user")?c.getValue():null;
-                pass = c.getName().equals("pass")?c.getValue():null;
-            }
-            if (UsersModel.getInstance().getUser(name)!=null
-            && UsersModel.getInstance().getUser(name).equals( new User(name, pass)))
-                req.getSession().setAttribute("user", UsersModel.getInstance().getUser(name));
 
+        if (Objects.isNull(req.getSession().getAttribute("user"))) {
+
+            Optional<User> user = AuthCookieHandler.get(req);
+
+            user.ifPresent(user1 -> new SignIn<>(req, new UserServices()).authorize(user1));
         }
         filterChain.doFilter(servletRequest, servletResponse);
     }

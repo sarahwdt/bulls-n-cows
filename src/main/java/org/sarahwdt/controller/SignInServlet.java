@@ -1,8 +1,11 @@
 package org.sarahwdt.controller;
 
 import org.sarahwdt.controller.authorization.Checker;
+import org.sarahwdt.controller.authorization.SignInWithCookies;
 import org.sarahwdt.controller.authorization.UserChecker;
-import org.sarahwdt.controller.authorization.checks.*;
+import org.sarahwdt.controller.authorization.checks.UserNotExistCheck;
+import org.sarahwdt.controller.authorization.checks.UserPasswordCheck;
+import org.sarahwdt.controller.cookies.AuthCookieHandler;
 import org.sarahwdt.model.entities.User;
 import org.sarahwdt.model.services.UserServices;
 
@@ -12,7 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.stream.Collectors;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.Optional;
 
 public class SignInServlet extends HttpServlet {
     @Override
@@ -23,17 +28,13 @@ public class SignInServlet extends HttpServlet {
         User user = new User(name, password);
         UserServices model = new UserServices();
 
-        Checker<?> checker = new UserChecker(user, Arrays.asList(
-                new UserNotExistCheck(model),
-                new UserPasswordCheck(model)));
+        SignInWithCookies<User> signIn = new SignInWithCookies<>(req, resp, model);
+        Optional<String> authResult = signIn.authorize(user);
 
-        if(checker.check().isEmpty()){
-            model.saveUser(user);
-            //TODO:Cookie and other
-            req.getSession().setAttribute("user", user);
+        if(!authResult.isPresent()){
             resp.sendRedirect("/");
         } else {
-            req.setAttribute("error", checker.check().get(0));
+            req.setAttribute("error", authResult.get());
             req.getRequestDispatcher("/pages/signup.jsp").forward(req, resp);
         }
     }

@@ -5,7 +5,6 @@ import org.sarahwdt.model.entities.User;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class UserChecker implements Checker<User> {
     private User target;
@@ -37,11 +36,8 @@ public class UserChecker implements Checker<User> {
     }
 
     @Override
-    public List<String> check() {
-        return checkList
-                .stream()
-                .map((checkInstance)->checkInstance.check(target))
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+    public String check() {
+        for(Check<User> check:checkList) if (Objects.nonNull(check.check(target))) return check.check(target);
+        return null;
     }
 }

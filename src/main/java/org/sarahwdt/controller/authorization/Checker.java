@@ -9,5 +9,6 @@ public interface Checker<T> {
     T getTarget();
     void setCheckList(List<Check<T>> checkList);
     List<Check<T>> getCheckList();
-    List<String> check();
+    //TODO: optional
+    String check();
 }

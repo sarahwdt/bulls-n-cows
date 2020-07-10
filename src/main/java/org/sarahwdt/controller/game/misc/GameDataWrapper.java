@@ -3,7 +3,6 @@ package org.sarahwdt.controller.game.misc;
 import org.sarahwdt.controller.game.core.MoveData;
 
 import java.util.Collection;
-import java.util.List;
 
 public class GameDataWrapper {
     public Collection<MoveData> collection;

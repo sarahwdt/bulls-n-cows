@@ -3,7 +3,6 @@ package org.sarahwdt.model;
 import org.sarahwdt.model.entities.User;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 

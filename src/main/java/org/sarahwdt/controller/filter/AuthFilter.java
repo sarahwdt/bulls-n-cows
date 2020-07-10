@@ -1,4 +1,4 @@
-package org.sarahwdt.controller.common;
+package org.sarahwdt.controller.filter;
 
 import org.sarahwdt.model.entities.User;
 
@@ -19,6 +19,7 @@ public class AuthFilter implements Filter {
             throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest)servletRequest;
         HttpServletResponse resp = (HttpServletResponse)servletResponse;
+
         User user = (User) req.getSession().getAttribute("user");
         if(user == null) resp.sendRedirect("/signin");
         else filterChain.doFilter(servletRequest, servletResponse);
