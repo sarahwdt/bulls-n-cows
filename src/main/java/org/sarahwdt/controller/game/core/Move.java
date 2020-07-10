@@ -1,5 +1,5 @@
 package org.sarahwdt.controller.game.core;
 
-public interface MoveData {
+public interface Move {
     String getData();
 }

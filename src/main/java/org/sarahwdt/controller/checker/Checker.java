@@ -1,6 +1,6 @@
-package org.sarahwdt.controller.authorization;
+package org.sarahwdt.controller.checker;
 
-import org.sarahwdt.controller.authorization.checks.Check;
+import org.sarahwdt.controller.checker.checks.Check;
 
 import java.util.List;
 

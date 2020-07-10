@@ -1,15 +1,15 @@
 package org.sarahwdt.controller.authorization;
 
-import org.sarahwdt.controller.authorization.checks.UserNotExistCheck;
-import org.sarahwdt.controller.authorization.checks.UserPasswordCheck;
+import org.sarahwdt.controller.checker.Checker;
+import org.sarahwdt.controller.checker.UserChecker;
+import org.sarahwdt.controller.checker.checks.auth.UserNotExistCheck;
+import org.sarahwdt.controller.checker.checks.auth.UserPasswordCheck;
 import org.sarahwdt.model.entities.User;
 import org.sarahwdt.model.services.UserServices;
 
 import javax.ejb.NoSuchEntityException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
-import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 

@@ -1,5 +1,6 @@
-package org.sarahwdt.controller.authorization.checks;
+package org.sarahwdt.controller.checker.checks.auth;
 
+import org.sarahwdt.controller.checker.checks.Check;
 import org.sarahwdt.model.entities.User;
 import org.sarahwdt.model.services.UserServices;
 

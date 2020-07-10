@@ -1,15 +1,15 @@
 package org.sarahwdt.controller.game;
 
 
-import org.sarahwdt.controller.game.core.MoveData;
+import org.sarahwdt.controller.game.core.Move;
 import org.sarahwdt.controller.game.core.symbols.GameCollection;
 
-public class BullsAndCowsGameData implements MoveData {
+public class BullsAndCowsGameMove implements Move {
     private final GameCollection guess;
     private final int bulls;
     private final int cows;
 
-    public BullsAndCowsGameData(GameCollection guess, int bulls, int cows) {
+    public BullsAndCowsGameMove(GameCollection guess, int bulls, int cows) {
         this.guess = guess;
         this.bulls = bulls;
         this.cows = cows;

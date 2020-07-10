@@ -1,11 +1,6 @@
 package org.sarahwdt.controller;
 
-import org.sarahwdt.controller.authorization.Checker;
 import org.sarahwdt.controller.authorization.SignInWithCookies;
-import org.sarahwdt.controller.authorization.UserChecker;
-import org.sarahwdt.controller.authorization.checks.UserNotExistCheck;
-import org.sarahwdt.controller.authorization.checks.UserPasswordCheck;
-import org.sarahwdt.controller.cookies.AuthCookieHandler;
 import org.sarahwdt.model.entities.User;
 import org.sarahwdt.model.services.UserServices;
 
@@ -14,9 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.NoSuchElementException;
-import java.util.Objects;
 import java.util.Optional;
 
 public class SignInServlet extends HttpServlet {

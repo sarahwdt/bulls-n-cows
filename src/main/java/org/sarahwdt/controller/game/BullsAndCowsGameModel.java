@@ -1,7 +1,7 @@
 package org.sarahwdt.controller.game;
 
 import org.sarahwdt.controller.game.core.GameModel;
-import org.sarahwdt.controller.game.core.MoveData;
+import org.sarahwdt.controller.game.core.Move;
 import org.sarahwdt.controller.game.core.creators.GuessCreator;
 import org.sarahwdt.controller.game.core.creators.SecretCreator;
 import org.sarahwdt.controller.game.core.symbols.GameCollection;
@@ -12,7 +12,7 @@ import java.util.List;
 
 public class BullsAndCowsGameModel implements GameModel {
     private final GameCollection secret;
-    private final List<MoveData> dataArray;
+    private final List<Move> dataArray;
     private boolean result = false;
 
     public BullsAndCowsGameModel(SecretCreator creator) {
@@ -21,12 +21,10 @@ public class BullsAndCowsGameModel implements GameModel {
     }
 
     @Override
-    public BullsAndCowsGameData move(GuessCreator creator) {
-        GameCollection guess = creator.create();
-        if (guess.getCollection().size() != secret.getCollection().size())
-            throw new IllegalArgumentException(guess.toString());
+    public Move move(GuessCreator guessCreator) {
+        GameCollection guess = guessCreator.create();
 
-        BullsAndCowsGameData data = new BullsAndCowsGameData(guess,
+        BullsAndCowsGameMove data = new BullsAndCowsGameMove(guess,
                 HeckCheck.checkBulls(secret, guess),
                 HeckCheck.checkCows(secret, guess));
 
@@ -36,7 +34,7 @@ public class BullsAndCowsGameModel implements GameModel {
         return data;
     }
 
-    public List<MoveData> getDataArray() {
+    public List<Move> getDataArray() {
         return dataArray;
     }
 
@@ -46,7 +44,7 @@ public class BullsAndCowsGameModel implements GameModel {
     }
 
     @Override
-    public Iterator<MoveData> iterator() {
+    public Iterator<Move> iterator() {
         return getDataArray().iterator();
     }
 }

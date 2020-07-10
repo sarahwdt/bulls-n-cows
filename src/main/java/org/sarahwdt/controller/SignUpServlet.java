@@ -1,10 +1,9 @@
 package org.sarahwdt.controller;
 
-import org.sarahwdt.controller.authorization.Checker;
+import org.sarahwdt.controller.checker.Checker;
 import org.sarahwdt.controller.authorization.SignInWithCookies;
-import org.sarahwdt.controller.authorization.UserChecker;
-import org.sarahwdt.controller.authorization.checks.*;
-import org.sarahwdt.controller.cookies.AuthCookieHandler;
+import org.sarahwdt.controller.checker.UserChecker;
+import org.sarahwdt.controller.checker.checks.auth.*;
 import org.sarahwdt.model.entities.User;
 import org.sarahwdt.model.services.UserServices;
 

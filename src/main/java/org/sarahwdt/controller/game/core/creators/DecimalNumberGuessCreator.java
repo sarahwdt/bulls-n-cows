@@ -7,7 +7,8 @@ import org.sarahwdt.controller.game.core.symbols.GameCollection;
 import java.util.LinkedList;
 
 public class DecimalNumberGuessCreator extends GuessCreator {
-    DecimalNumberGuess guess;
+    private final DecimalNumberGuess guess;
+
 
     public DecimalNumberGuessCreator(String s) {
         super(s);
