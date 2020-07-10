@@ -1,14 +1,18 @@
 package org.sarahwdt.controller;
 
-import org.sarahwdt.model.UsersModel;
+import org.sarahwdt.controller.authorization.Checker;
+import org.sarahwdt.controller.authorization.UserChecker;
+import org.sarahwdt.controller.authorization.checks.*;
 import org.sarahwdt.model.entities.User;
+import org.sarahwdt.model.services.UserServices;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class SignInServlet extends HttpServlet {
     @Override
@@ -17,24 +21,20 @@ public class SignInServlet extends HttpServlet {
         String password = req.getParameter("pass");
 
         User user = new User(name, password);
-        UsersModel model = UsersModel.getInstance();
+        UserServices model = new UserServices();
 
-        //TODO
-        if (model.getUsers().contains(user)) {
+        Checker<?> checker = new UserChecker(user, Arrays.asList(
+                new UserNotExistCheck(model),
+                new UserPasswordCheck(model)));
+
+        if(checker.check().isEmpty()){
+            model.saveUser(user);
+            //TODO:Cookie and other
             req.getSession().setAttribute("user", user);
-
-            //TODO: Делать куки в отдельном классе
-            Cookie nameCookie = new Cookie("name", name);
-            nameCookie.setMaxAge(Integer.MAX_VALUE);
-            Cookie passCookie = new Cookie("pass", password);
-            passCookie.setMaxAge(Integer.MAX_VALUE);
-            resp.addCookie(nameCookie);
-            resp.addCookie(passCookie);
-
             resp.sendRedirect("/");
         } else {
-            req.setAttribute("error", "Wrong name or password.");
-            req.getRequestDispatcher("/pages/signin.jsp").forward(req, resp);
+            req.setAttribute("error", checker.check().get(0));
+            req.getRequestDispatcher("/pages/signup.jsp").forward(req, resp);
         }
     }
 

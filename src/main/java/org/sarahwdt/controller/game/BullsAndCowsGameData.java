@@ -8,13 +8,11 @@ public class BullsAndCowsGameData implements MoveData {
     private final GameCollection guess;
     private final int bulls;
     private final int cows;
-    private final boolean result;
 
-    public BullsAndCowsGameData(GameCollection guess, int bulls, int cows, boolean result) {
+    public BullsAndCowsGameData(GameCollection guess, int bulls, int cows) {
         this.guess = guess;
         this.bulls = bulls;
         this.cows = cows;
-        this.result = result;
     }
 
     public GameCollection getGuess() {
@@ -29,7 +27,7 @@ public class BullsAndCowsGameData implements MoveData {
         return cows;
     }
 
-    public boolean getResult() {
-        return result;
+    public String getData() {
+        return guess.toString() + " = " + "B" + bulls + "C" + cows;
     }
 }

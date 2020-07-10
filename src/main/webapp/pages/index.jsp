@@ -8,6 +8,7 @@
         <jsp:include page="/pages/elements/_header.jsp" />
         <div>
             <h1>Hello</h1>
+            <%if(request.getAttribute("message") != null) out.print(request.getParameter("message"));%>
         </div>
         <jsp:include page="/pages/elements/_footer.jsp" />
     </body>

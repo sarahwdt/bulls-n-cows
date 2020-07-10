@@ -6,17 +6,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Objects;
 
 public class SignOutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(req.getSession().getAttribute("user")!=null){
-            req.getSession().removeAttribute("user");
-        }
-        for(Cookie c:req.getCookies()){
-            if(c.getName().equals("name")) c.setMaxAge(0);
-            if(c.getName().equals("password")) c.setMaxAge(0);
-        }
-        resp.sendRedirect("/signin");
+        if(!Objects.isNull(req.getSession().getAttribute("user"))) req.getSession().removeAttribute("user");
+
+        Arrays.stream(req.getCookies())
+                .filter(cookie -> cookie.getName().equals("name") || cookie.getName().equals("password"))
+                .forEach(cookie -> cookie.setMaxAge(0));
+
+        resp.sendRedirect("/");
     }
 }

@@ -13,4 +13,12 @@ public class DecimalNumberSecret implements GameCollection {
     public Set<?> getCollection() {
         return secret;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        for(Integer i:secret)
+            result.append(i.toString());
+        return result.toString();
+    }
 }

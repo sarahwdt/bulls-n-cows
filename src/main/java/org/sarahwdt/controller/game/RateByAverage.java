@@ -11,10 +11,11 @@ public class RateByAverage implements Rate {
 
     public RateByAverage(Collection<Score> scores) {
         for (Score score : scores) rating += score.getScore();
+        rating/=scores.size();
     }
 
     @Override
     public double getRate() {
-        return rating = 0;
+        return this.rating;
     }
 }
