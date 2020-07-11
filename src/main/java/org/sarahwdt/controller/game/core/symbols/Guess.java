@@ -2,22 +2,22 @@ package org.sarahwdt.controller.game.core.symbols;
 
 import java.util.LinkedList;
 
-public class DecimalNumberGuess implements GameCollection {
-    protected final LinkedList<Integer> guess;
+public class Guess implements GameCollection {
+    protected final LinkedList<Character> guess;
 
-    public DecimalNumberGuess(LinkedList<Integer> guess) {
+    public Guess(LinkedList<Character> guess) {
         this.guess = guess;
     }
 
     @Override
-    public LinkedList<?> getCollection() {
+    public LinkedList<Character> getCollection() {
         return guess;
     }
 
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        for(Integer i:guess)
+        for (Character i : guess)
             result.append(i.toString());
         return result.toString();
     }

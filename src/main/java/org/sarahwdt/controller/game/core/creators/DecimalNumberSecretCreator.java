@@ -1,8 +1,8 @@
 package org.sarahwdt.controller.game.core.creators;
 
 
-import org.sarahwdt.controller.game.core.symbols.DecimalNumberSecret;
 import org.sarahwdt.controller.game.core.symbols.GameCollection;
+import org.sarahwdt.controller.game.core.symbols.Secret;
 
 import java.util.LinkedHashSet;
 
@@ -13,13 +13,13 @@ public class DecimalNumberSecretCreator extends SecretCreator {
 
     @Override
     public GameCollection create() {
-        LinkedHashSet<Integer> secret = new LinkedHashSet<>();
+        LinkedHashSet<Character> secret = new LinkedHashSet<>();
         for (int i = 0; i < this.getLength(); i++) {
             do {
-                Integer rand = (int) (Math.random() * 1000 % 10);
-                secret.add(rand);
+                int rand = (int) (Math.random() * 1000 % 10);
+                secret.add(Character.forDigit(rand, 10));
             } while (secret.size() <= i);
         }
-        return new DecimalNumberSecret(secret);
+        return new Secret(secret);
     }
 }

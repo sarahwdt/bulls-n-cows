@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.Optional;
 
-public class AuthCookieHandler{
+public class AuthCookieHandler {
     public static void set(User user, HttpServletResponse response) {
         response.addCookie(new Cookie("name", user.getName()));
         response.addCookie(new Cookie("pass", user.getPassword()));
@@ -21,8 +21,8 @@ public class AuthCookieHandler{
         Optional<Cookie> password = Arrays.stream(request.getCookies())
                 .filter(cookie -> cookie.getName().equals("pass"))
                 .findFirst();
-        return name.isPresent() && password.isPresent()?
-                Optional.of(new User(name.get().getValue(), password.get().getValue())):
+        return name.isPresent() && password.isPresent() ?
+                Optional.of(new User(name.get().getValue(), password.get().getValue())) :
                 Optional.empty();
     }
 

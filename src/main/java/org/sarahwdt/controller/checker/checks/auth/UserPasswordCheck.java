@@ -17,9 +17,9 @@ public class UserPasswordCheck implements Check<User> {
     public String check(User target) {
         return services.findAllUsers()
                 .stream()
-                .filter((user)-> user.getName().equals(target.getName()))
+                .filter((user) -> user.getName().equals(target.getName()))
                 .findFirst()
-                .orElseThrow(()->new NoSuchElementException("User with this name not found."))
+                .orElseThrow(() -> new NoSuchElementException("User with this name not found."))
                 .getPassword().equals(target.getPassword())
                 ? null : "Wrong password.";
     }

@@ -19,6 +19,6 @@ public class UserNotExistCheck implements Check<User> {
                 .stream()
                 .map(User::getName)
                 .collect(Collectors.toList())
-                .contains(target.getName()) ? null : "User with name " + target.getName() +" not exists.";
+                .contains(target.getName()) ? null : "User with name " + target.getName() + " not exists.";
     }
 }

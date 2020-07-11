@@ -9,6 +9,7 @@ import java.io.IOException;
 
 public class AuthFilter implements Filter {
     FilterConfig config;
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         this.config = filterConfig;
@@ -17,11 +18,11 @@ public class AuthFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
-        HttpServletRequest req = (HttpServletRequest)servletRequest;
-        HttpServletResponse resp = (HttpServletResponse)servletResponse;
+        HttpServletRequest req = (HttpServletRequest) servletRequest;
+        HttpServletResponse resp = (HttpServletResponse) servletResponse;
 
         User user = (User) req.getSession().getAttribute("user");
-        if(user == null) resp.sendRedirect("/signin");
+        if (user == null) resp.sendRedirect("/signin");
         else filterChain.doFilter(servletRequest, servletResponse);
     }
 

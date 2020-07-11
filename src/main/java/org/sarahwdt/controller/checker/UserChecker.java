@@ -1,6 +1,5 @@
 package org.sarahwdt.controller.checker;
 
-import org.sarahwdt.controller.checker.Checker;
 import org.sarahwdt.controller.checker.checks.Check;
 import org.sarahwdt.model.entities.User;
 
@@ -11,14 +10,9 @@ public class UserChecker implements Checker<User> {
     private User target;
     private List<Check<User>> checkList;
 
-    public UserChecker(User target, List<Check<User>> checkList){
+    public UserChecker(User target, List<Check<User>> checkList) {
         this.target = target;
         this.checkList = checkList;
-    }
-
-    @Override
-    public void setTarget(User target) {
-        this.target = target;
     }
 
     @Override
@@ -27,8 +21,8 @@ public class UserChecker implements Checker<User> {
     }
 
     @Override
-    public void setCheckList(List<Check<User>> checkList) {
-        this.checkList = checkList;
+    public void setTarget(User target) {
+        this.target = target;
     }
 
     @Override
@@ -37,8 +31,13 @@ public class UserChecker implements Checker<User> {
     }
 
     @Override
+    public void setCheckList(List<Check<User>> checkList) {
+        this.checkList = checkList;
+    }
+
+    @Override
     public String check() {
-        for(Check<User> check:checkList) if (Objects.nonNull(check.check(target))) return check.check(target);
+        for (Check<User> check : checkList) if (Objects.nonNull(check.check(target))) return check.check(target);
         return null;
     }
 }

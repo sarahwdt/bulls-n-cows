@@ -2,22 +2,22 @@ package org.sarahwdt.controller.game.core.symbols;
 
 import java.util.Set;
 
-public class DecimalNumberSecret implements GameCollection {
-    protected final Set<Integer> secret;
+public class Secret implements GameCollection {
+    protected final Set<Character> secret;
 
-    public DecimalNumberSecret(Set<Integer> secret) {
+    public Secret(Set<Character> secret) {
         this.secret = secret;
     }
 
     @Override
-    public Set<?> getCollection() {
+    public Set<Character> getCollection() {
         return secret;
     }
 
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        for(Integer i:secret)
+        for (Character i : secret)
             result.append(i.toString());
         return result.toString();
     }

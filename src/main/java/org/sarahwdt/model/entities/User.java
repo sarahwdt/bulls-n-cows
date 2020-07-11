@@ -33,17 +33,17 @@ public class User {
         this.rating = 0;
     }
 
-    public void addGame(Game game){
+    public void addGame(Game game) {
         game.setUser(this);
         games.add(game);
     }
 
-    public void setGames(List<Game> games){
-        this.games = games;
+    public List<Game> getGames() {
+        return games;
     }
 
-    public List<Game> getGames(){
-        return games;
+    public void setGames(List<Game> games) {
+        this.games = games;
     }
 
     public int getId() {

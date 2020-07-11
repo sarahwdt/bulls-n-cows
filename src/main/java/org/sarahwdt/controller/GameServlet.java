@@ -1,12 +1,9 @@
 package org.sarahwdt.controller;
 
-import org.sarahwdt.controller.checker.Checker;
-import org.sarahwdt.controller.checker.DecimalGuessChecker;
-import org.sarahwdt.controller.checker.checks.game.DecimalNumberCheck;
-import org.sarahwdt.controller.checker.checks.game.LengthCheck;
-import org.sarahwdt.controller.game.BullsAndCowsGameController;
-import org.sarahwdt.controller.game.core.creators.DecimalNumberGuessCreator;
-import org.sarahwdt.controller.game.core.creators.DecimalNumberSecretCreator;
+import org.sarahwdt.controller.game.core.GameController;
+import org.sarahwdt.controller.game.core.builder.EasyDecimalNumberGameControllerBuilder;
+import org.sarahwdt.controller.game.core.builder.GameControllerBuilder;
+import org.sarahwdt.controller.game.core.builder.GameDirector;
 import org.sarahwdt.controller.game.misc.GameDataWrapper;
 import org.sarahwdt.model.entities.MoveData;
 import org.sarahwdt.model.entities.User;
@@ -17,11 +14,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
 
 
 public class GameServlet extends HttpServlet {
-    private BullsAndCowsGameController gameModel;
+    private GameController gameController;
 
     public GameServlet() {
         super();
@@ -29,48 +29,28 @@ public class GameServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        this.gameModel = new BullsAndCowsGameController(new DecimalNumberSecretCreator(4));
-        User user = (User)req.getSession().getAttribute("user");
-        user.addGame(gameModel.getGame());
+        User user = (User) req.getSession().getAttribute("user");
 
-        UserServices model = new UserServices();
-        model.updateUser(user);
+        GameControllerBuilder builder = new EasyDecimalNumberGameControllerBuilder();
+        GameDirector director = new GameDirector(builder, user, new UserServices());
+        director.makeController();
+
+        gameController = builder.getController();
+
         req.getRequestDispatcher("/pages/game.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String guess = req.getParameter("guess");
-        Checker<String> checker = new DecimalGuessChecker(guess, Arrays.asList(
-                new LengthCheck(4),
-                new DecimalNumberCheck(guess)
-        ));
-        if(Objects.isNull(checker.check())) {
-            gameModel.move(new DecimalNumberGuessCreator(guess));
-            User user = (User)req.getSession().getAttribute("user");
-            UserServices model = new UserServices();
-            model.updateUser(user);
+        String result = gameController.move(guess);
+        List<MoveData> list = new LinkedList<>(gameController.getGame().getMoveData());
+        Collections.reverse(list);
 
-            List<MoveData> list = new LinkedList<>(gameModel.getDataArray());
-            Collections.reverse(list);
+        req.setAttribute("data_array", new GameDataWrapper(list));
+        if (Objects.nonNull(result))
+            req.setAttribute("error", result);
 
-            req.setAttribute("data_array", new GameDataWrapper(list));
-
-            //win
-            if (gameModel.getResult()){
-                resp.sendRedirect("/?message=win!");
-            }
-            else req.getRequestDispatcher("/pages/game.jsp").forward(req, resp);
-
-        }else {
-            List<MoveData> list = new LinkedList<>(gameModel.getDataArray());
-            Collections.reverse(list);
-
-            req.setAttribute("data_array", new GameDataWrapper(list));
-
-            req.setAttribute("error", checker.check());
-            req.getRequestDispatcher("/pages/game.jsp").forward(req, resp);
-        }
-
+        req.getRequestDispatcher("/pages/game.jsp").forward(req, resp);
     }
 }

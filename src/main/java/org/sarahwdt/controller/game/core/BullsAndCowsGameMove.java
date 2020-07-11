@@ -1,7 +1,6 @@
-package org.sarahwdt.controller.game;
+package org.sarahwdt.controller.game.core;
 
 
-import org.sarahwdt.controller.game.core.Move;
 import org.sarahwdt.controller.game.core.symbols.GameCollection;
 import org.sarahwdt.model.entities.MoveData;
 

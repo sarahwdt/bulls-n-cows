@@ -23,7 +23,7 @@ public class SignInServlet extends HttpServlet {
         SignInWithCookies<User> signIn = new SignInWithCookies<>(req, resp, model);
         Optional<String> authResult = signIn.authorize(user);
 
-        if(!authResult.isPresent()){
+        if (!authResult.isPresent()) {
             resp.sendRedirect("/");
         } else {
             req.setAttribute("error", authResult.get());

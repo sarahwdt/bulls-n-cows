@@ -7,15 +7,13 @@ import java.util.List;
 @Entity
 @Table(name = "games")
 public class Game {
+    @Column(name = "secret")
+    public String secret;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MoveData> moveData;
-
-    @Column(name = "secret")
-    public String secret;
     @Column(name = "result")
     private boolean result;
 
@@ -23,7 +21,7 @@ public class Game {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Game(){
+    public Game() {
 
     }
 
@@ -33,10 +31,11 @@ public class Game {
         this.result = result;
     }
 
-    public void addMoveData(MoveData data){
+    public void addMoveData(MoveData data) {
         data.setGame(this);
         this.moveData.add(data);
     }
+
     public int getId() {
         return id;
     }
@@ -53,11 +52,11 @@ public class Game {
         this.moveData = moveData;
     }
 
-    public String getSecret(){
+    public String getSecret() {
         return this.secret;
     }
 
-    public void setSecret(String secret){
+    public void setSecret(String secret) {
         this.secret = secret;
     }
 

@@ -5,10 +5,14 @@ import org.sarahwdt.controller.checker.checks.Check;
 import java.util.List;
 
 public interface Checker<T> {
-    void setTarget(T target);
     T getTarget();
-    void setCheckList(List<Check<T>> checkList);
+
+    void setTarget(T target);
+
     List<Check<T>> getCheckList();
+
+    void setCheckList(List<Check<T>> checkList);
+
     //TODO: optional
     String check();
 }

@@ -11,22 +11,22 @@ public class MoveData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column (name = "guess")
+    @Column(name = "guess")
     private String guess;
-    @Column (name = "bulls")
+    @Column(name = "bulls")
     private int bulls;
-    @Column (name = "cows")
+    @Column(name = "cows")
     private int cows;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "game_id")
     private Game game;
 
-    public MoveData(){
+    public MoveData() {
 
     }
 
-    public MoveData(GameCollection guess, int bulls, int cows){
+    public MoveData(GameCollection guess, int bulls, int cows) {
         this.guess = guess.toString();
         this.bulls = bulls;
         this.cows = cows;

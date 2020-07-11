@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
-public class SignInWithCookies<U extends User> extends SignIn<U>{
+public class SignInWithCookies<U extends User> extends SignIn<U> {
     private HttpServletResponse resp;
 
     public SignInWithCookies(HttpServletRequest req, HttpServletResponse resp, UserServices model) {

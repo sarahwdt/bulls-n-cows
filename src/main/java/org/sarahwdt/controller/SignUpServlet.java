@@ -1,7 +1,7 @@
 package org.sarahwdt.controller;
 
-import org.sarahwdt.controller.checker.Checker;
 import org.sarahwdt.controller.authorization.SignInWithCookies;
+import org.sarahwdt.controller.checker.Checker;
 import org.sarahwdt.controller.checker.UserChecker;
 import org.sarahwdt.controller.checker.checks.auth.*;
 import org.sarahwdt.model.entities.User;
@@ -34,9 +34,9 @@ public class SignUpServlet extends HttpServlet {
                 new UserExistCheck(model)));
 
         //TODO:null->optional
-        if(Objects.isNull(checker.check())){
+        if (Objects.isNull(checker.check())) {
             model.saveUser(user);
-            new SignInWithCookies<>( req, resp, model).authorize(user);
+            new SignInWithCookies<>(req, resp, model).authorize(user);
             resp.sendRedirect("/");
         } else {
             req.setAttribute("error", checker.check());

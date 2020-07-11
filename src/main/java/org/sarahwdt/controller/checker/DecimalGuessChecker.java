@@ -1,44 +1,44 @@
 package org.sarahwdt.controller.checker;
 
 import org.sarahwdt.controller.checker.checks.Check;
-import org.sarahwdt.controller.checker.checks.game.DecimalNumberCheck;
-import org.sarahwdt.model.entities.User;
+import org.sarahwdt.controller.game.core.creators.GuessCreator;
 
 import java.util.List;
 import java.util.Objects;
 
-public class DecimalGuessChecker implements Checker<String>{
-    private String target;
-    List<Check<String>> checkList;
+public class DecimalGuessChecker implements Checker<GuessCreator> {
+    private GuessCreator target;
+    private List<Check<GuessCreator>> checkList;
 
-    public DecimalGuessChecker(String target, List<Check<String>> checkList){
+    public DecimalGuessChecker(GuessCreator target, List<Check<GuessCreator>> checkList) {
         this.target = target;
         this.checkList = checkList;
     }
 
     @Override
-    public void setTarget(String target) {
-        this.target = target;
-    }
-
-    @Override
-    public String getTarget() {
+    public GuessCreator getTarget() {
         return target;
     }
 
     @Override
-    public void setCheckList(List<Check<String>> checkList) {
-        this.checkList = checkList;
+    public void setTarget(GuessCreator target) {
+        this.target = target;
     }
 
     @Override
-    public List<Check<String>> getCheckList() {
+    public List<Check<GuessCreator>> getCheckList() {
         return checkList;
     }
 
     @Override
+    public void setCheckList(List<Check<GuessCreator>> checkList) {
+        this.checkList = checkList;
+    }
+
+    @Override
     public String check() {
-        for(Check<String> check:checkList) if (Objects.nonNull(check.check(target))) return check.check(target);
+        for (Check<GuessCreator> check : checkList)
+            if (Objects.nonNull(check.check(target))) return check.check(target);
         return null;
     }
 }
