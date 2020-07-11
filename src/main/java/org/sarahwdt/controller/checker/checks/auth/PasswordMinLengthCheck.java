@@ -4,7 +4,7 @@ import org.sarahwdt.controller.checker.checks.Check;
 import org.sarahwdt.model.entities.User;
 
 public class PasswordMinLengthCheck implements Check<User> {
-    private int minLength;
+    private final int minLength;
 
     public PasswordMinLengthCheck(int maxLength) {
         this.minLength = maxLength;

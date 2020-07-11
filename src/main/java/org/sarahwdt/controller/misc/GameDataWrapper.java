@@ -1,4 +1,4 @@
-package org.sarahwdt.controller.game.misc;
+package org.sarahwdt.controller.misc;
 
 import org.sarahwdt.model.entities.MoveData;
 

@@ -1,5 +1,5 @@
 <%@page import="org.sarahwdt.model.entities.MoveData"%>
-<%@page import="org.sarahwdt.controller.game.misc.GameDataWrapper" %>
+<%@page import="org.sarahwdt.controller.misc.GameDataWrapper" %>
 <html>
     <meta content="text/html; charset=UTF-8">
     <head>
@@ -9,9 +9,9 @@
     <body class="w3-light-grey">
         <jsp:include page="/pages/elements/_header.jsp" />
         <form method="post" action="/game" class="w3-container w3-card-4" style="width: 40%; margin-left: auto; margin-right:auto">
-                <h2 class="w3-center"> Guess... </h2>
+                <h2 class="w3-center w3-grey"> <% if(request.getAttribute("mess")!=null) out.print(request.getAttribute("mess").toString()); else out.print("Try to guess.");%></h2>
                 <h3 class="w3-center w3-red"><%if(request.getAttribute("error") != null) out.print(request.getAttribute("error"));%></h3>
-                <div class="w3-container" style="height: 205px; overflow: auto;">
+                <div class="w3-container" style="min-height: 205px; overflow: auto;">
                     <ul class="w3-ul">
                         <%
                         if(request.getAttribute("data_array")!=null){

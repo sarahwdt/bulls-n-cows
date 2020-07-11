@@ -4,7 +4,7 @@ import org.sarahwdt.controller.game.core.GameController;
 import org.sarahwdt.controller.game.core.builder.EasyDecimalNumberGameControllerBuilder;
 import org.sarahwdt.controller.game.core.builder.GameControllerBuilder;
 import org.sarahwdt.controller.game.core.builder.GameDirector;
-import org.sarahwdt.controller.game.misc.GameDataWrapper;
+import org.sarahwdt.controller.misc.GameDataWrapper;
 import org.sarahwdt.model.entities.MoveData;
 import org.sarahwdt.model.entities.User;
 import org.sarahwdt.model.services.UserServices;

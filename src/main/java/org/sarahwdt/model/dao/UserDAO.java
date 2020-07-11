@@ -15,7 +15,7 @@ public class UserDAO implements DAO<User> {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         User user = session.get(User.class, id);
         Hibernate.initialize(user.getGames());
-        for(Game g:user.getGames()) Hibernate.initialize(g.getMoveData());
+        for (Game g : user.getGames()) Hibernate.initialize(g.getMoveData());
         session.close();
         return user;
     }
@@ -49,7 +49,7 @@ public class UserDAO implements DAO<User> {
         List<User> users = session.createQuery("FROM User").list();
         for (User u : users) {
             Hibernate.initialize(u.getGames());
-            for(Game g:u.getGames()) Hibernate.initialize(g.getMoveData());
+            for (Game g : u.getGames()) Hibernate.initialize(g.getMoveData());
         }
         session.close();
         return users;

@@ -5,8 +5,8 @@ import org.sarahwdt.model.services.UserServices;
 
 public class GameDirector {
     private GameControllerBuilder builder;
-    private User user;
-    private UserServices services;
+    private final User user;
+    private final UserServices services;
 
     public GameDirector(GameControllerBuilder builder, User user, UserServices services) {
         this.builder = builder;

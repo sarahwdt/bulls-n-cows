@@ -4,7 +4,7 @@ import org.sarahwdt.controller.checker.checks.Check;
 import org.sarahwdt.model.entities.User;
 
 public class NameMaxLengthCheck implements Check<User> {
-    private int maxLength;
+    private final int maxLength;
 
     public NameMaxLengthCheck(int maxLength) {
         this.maxLength = maxLength;
