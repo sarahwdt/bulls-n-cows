@@ -25,5 +25,3 @@ org.apache.tomcat.maven:tomcat7-maven-plugin:2.2
 bulls_and_cows.backup - дамп базы данных для проекта
 
 Проект разрабатывался в Intelij IDEA 2020.1.2 (Community Edition)
-
-Проект доступен на GitHub: https://github.com/sarahwdt/bulls-n-cows
