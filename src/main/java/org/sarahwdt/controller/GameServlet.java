@@ -4,11 +4,13 @@ import org.sarahwdt.controller.checker.Checker;
 import org.sarahwdt.controller.checker.DecimalGuessChecker;
 import org.sarahwdt.controller.checker.checks.game.DecimalNumberCheck;
 import org.sarahwdt.controller.checker.checks.game.LengthCheck;
-import org.sarahwdt.controller.game.BullsAndCowsGameModel;
-import org.sarahwdt.controller.game.core.Move;
+import org.sarahwdt.controller.game.BullsAndCowsGameController;
 import org.sarahwdt.controller.game.core.creators.DecimalNumberGuessCreator;
 import org.sarahwdt.controller.game.core.creators.DecimalNumberSecretCreator;
 import org.sarahwdt.controller.game.misc.GameDataWrapper;
+import org.sarahwdt.model.entities.MoveData;
+import org.sarahwdt.model.entities.User;
+import org.sarahwdt.model.services.UserServices;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +21,7 @@ import java.util.*;
 
 
 public class GameServlet extends HttpServlet {
-    private BullsAndCowsGameModel game;
+    private BullsAndCowsGameController gameModel;
 
     public GameServlet() {
         super();
@@ -27,8 +29,12 @@ public class GameServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        this.game = new BullsAndCowsGameModel(new DecimalNumberSecretCreator(4));
+        this.gameModel = new BullsAndCowsGameController(new DecimalNumberSecretCreator(4));
+        User user = (User)req.getSession().getAttribute("user");
+        user.addGame(gameModel.getGame());
 
+        UserServices model = new UserServices();
+        model.updateUser(user);
         req.getRequestDispatcher("/pages/game.jsp").forward(req, resp);
     }
 
@@ -40,18 +46,24 @@ public class GameServlet extends HttpServlet {
                 new DecimalNumberCheck(guess)
         ));
         if(Objects.isNull(checker.check())) {
-            game.move(new DecimalNumberGuessCreator(guess));
+            gameModel.move(new DecimalNumberGuessCreator(guess));
+            User user = (User)req.getSession().getAttribute("user");
+            UserServices model = new UserServices();
+            model.updateUser(user);
 
-            List<Move> list = new LinkedList<>(game.getDataArray());
+            List<MoveData> list = new LinkedList<>(gameModel.getDataArray());
             Collections.reverse(list);
 
             req.setAttribute("data_array", new GameDataWrapper(list));
 
             //win
-            if (game.getResult()) resp.sendRedirect("/?message=win!");
+            if (gameModel.getResult()){
+                resp.sendRedirect("/?message=win!");
+            }
             else req.getRequestDispatcher("/pages/game.jsp").forward(req, resp);
+
         }else {
-            List<Move> list = new LinkedList<>(game.getDataArray());
+            List<MoveData> list = new LinkedList<>(gameModel.getDataArray());
             Collections.reverse(list);
 
             req.setAttribute("data_array", new GameDataWrapper(list));

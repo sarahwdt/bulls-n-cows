@@ -1,4 +1,4 @@
-<%@page import="org.sarahwdt.controller.game.core.MoveData" %>
+<%@page import="org.sarahwdt.model.entities.MoveData"%>
 <%@page import="org.sarahwdt.controller.game.misc.GameDataWrapper" %>
 <html>
     <meta content="text/html; charset=UTF-8">
@@ -17,7 +17,7 @@
                         if(request.getAttribute("data_array")!=null){
                             GameDataWrapper dataArray = (GameDataWrapper)request.getAttribute("data_array");
                             for(MoveData data:dataArray.getCollection()){
-                                out.print("<li>" + data.getData() + "</li>");
+                                out.print("<li>" + data.toString() + "</li>");
                             }
                         }
                         %>

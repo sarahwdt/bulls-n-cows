@@ -1,6 +1,8 @@
 package org.sarahwdt.model.entities;
 
 import javax.persistence.*;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -13,6 +15,11 @@ public class User {
     private String name;
     @Column(name = "password")
     private String password;
+    @Column(name = "rating")
+    private double rating;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Game> games;
 
     public User() {
 
@@ -22,6 +29,21 @@ public class User {
     public User(String name, String password) {
         this.name = name;
         this.password = password;
+        this.games = new LinkedList<>();
+        this.rating = 0;
+    }
+
+    public void addGame(Game game){
+        game.setUser(this);
+        games.add(game);
+    }
+
+    public void setGames(List<Game> games){
+        this.games = games;
+    }
+
+    public List<Game> getGames(){
+        return games;
     }
 
     public int getId() {
@@ -47,6 +69,15 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
 
     @Override
     public boolean equals(Object o) {

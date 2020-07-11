@@ -3,7 +3,7 @@
     <div class="w3-bar-item w3-left"><%
         if(request.getSession().getAttribute("user") != null){
             User user = (User)request.getSession().getAttribute("user");
-            out.print("Hello, " + user.getName());
+            out.print("Hello, " + user.getName() +";id=" + user.getId());
         } else
             out.print("You not authorized");
     %></div>

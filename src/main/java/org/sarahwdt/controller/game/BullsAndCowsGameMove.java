@@ -3,31 +3,16 @@ package org.sarahwdt.controller.game;
 
 import org.sarahwdt.controller.game.core.Move;
 import org.sarahwdt.controller.game.core.symbols.GameCollection;
+import org.sarahwdt.model.entities.MoveData;
 
 public class BullsAndCowsGameMove implements Move {
-    private final GameCollection guess;
-    private final int bulls;
-    private final int cows;
+    private final MoveData data;
 
     public BullsAndCowsGameMove(GameCollection guess, int bulls, int cows) {
-        this.guess = guess;
-        this.bulls = bulls;
-        this.cows = cows;
+        data = new MoveData(guess, bulls, cows);
     }
 
-    public GameCollection getGuess() {
-        return guess;
-    }
-
-    public int getBulls() {
-        return bulls;
-    }
-
-    public int getCows() {
-        return cows;
-    }
-
-    public String getData() {
-        return guess.toString() + " = " + "B" + bulls + "C" + cows;
+    public MoveData getData() {
+        return data;
     }
 }

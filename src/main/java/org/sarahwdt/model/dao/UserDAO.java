@@ -1,5 +1,6 @@
 package org.sarahwdt.model.dao;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.sarahwdt.model.entities.User;
@@ -12,6 +13,7 @@ public class UserDAO implements DAO<User>{
     public User findById(int id) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         User user = session.get(User.class, id);
+        Hibernate.initialize(user.getGames());
         session.close();
         return user;
     }
@@ -43,6 +45,9 @@ public class UserDAO implements DAO<User>{
     public List<User> findAll() {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         List<User> users = session.createQuery("FROM User").list();
+        for (User u:users){
+            Hibernate.initialize(u.getGames());
+        }
         session.close();
         return users;
     }

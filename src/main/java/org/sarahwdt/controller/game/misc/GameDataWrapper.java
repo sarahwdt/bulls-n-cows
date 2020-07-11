@@ -1,21 +1,22 @@
 package org.sarahwdt.controller.game.misc;
 
 import org.sarahwdt.controller.game.core.Move;
+import org.sarahwdt.model.entities.MoveData;
 
 import java.util.Collection;
 
 public class GameDataWrapper {
-    public Collection<Move> collection;
+    public Collection<MoveData> collection;
 
-    public GameDataWrapper(Collection<Move> collection) {
+    public GameDataWrapper(Collection<MoveData> collection) {
         this.collection = collection;
     }
 
-    public void setCollection(Collection<Move> collection) {
+    public void setCollection(Collection<MoveData> collection) {
         this.collection = collection;
     }
 
-    public Collection<Move> getCollection() {
+    public Collection<MoveData> getCollection() {
         return collection;
     }
 }
