@@ -4,7 +4,7 @@
 В проекте используются следующие библиотеки:
 org.hibernate.orm:hibernate-core:6.0.0.Alpha5
 org.postgresql:postgresql:42.2.14.jre7
-javax:javaee-api:8.0.1				
+javax:javaee-api:8.0.1
 javax.servlet:servlet-api:3.0-alpha-1
 
 Для сборки проекта используется maven. Сборка происходит с помощью плагина
